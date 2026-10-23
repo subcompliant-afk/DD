@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#050607">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Deen over Dunya">
+<title>Deen over Dunya</title>
+<style>
+:root{color-scheme:dark;--bg:#050607;--ink:#eef2f0;--muted:#7f8b85;--edge:rgba(255,255,255,.1);--lit:#d9efe3;--glow:rgba(120,220,170,.5);--red:#c0303a;--sand:#a8977a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{height:100%;background:var(--bg);-webkit-text-size-adjust:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+button,input,textarea{font:inherit;color:inherit}button{cursor:pointer;touch-action:manipulation}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--lit);outline-offset:3px}
+.orb{position:fixed;border-radius:50%;filter:blur(70px);pointer-events:none;z-index:0}
+.o1{width:300px;height:300px;background:#0d4a34;opacity:.55;top:-90px;left:-100px;animation:d1 24s ease-in-out infinite alternate}
+.o2{width:280px;height:280px;background:#1b2a3b;opacity:.6;bottom:-80px;right:-110px;animation:d2 28s ease-in-out infinite alternate}
+.o3{width:170px;height:170px;background:#3b2a0d;opacity:.3;top:48%;left:58%;animation:d1 32s ease-in-out infinite alternate-reverse}
+@keyframes d1{to{transform:translate(70px,90px)}}@keyframes d2{to{transform:translate(-80px,-70px)}}
+.grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(circle at 50% 30%,#000,transparent 72%);mask-image:radial-gradient(circle at 50% 30%,#000,transparent 72%)}
+.app{position:relative;z-index:1;width:min(100% - 24px,460px);margin:0 auto;padding:10px 0 32px}
+.glass{background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.02));border:1px solid var(--edge);border-radius:28px;-webkit-backdrop-filter:blur(22px) saturate(140%);backdrop-filter:blur(22px) saturate(140%);box-shadow:0 18px 50px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.09)}
+.top{display:flex;justify-content:space-between;align-items:center;padding:4px 2px 14px}
+.brand{display:flex;flex-direction:column;gap:4px;font-weight:850;font-size:17px;letter-spacing:.05em;line-height:1}
+.brand small{font-size:10px;letter-spacing:.22em;color:var(--muted);font-weight:700}
+.gear{width:44px;height:44px;border-radius:14px;color:var(--muted);font-size:18px;line-height:1;display:grid;place-items:center;padding:0}
+.pad{padding:20px 18px;margin-bottom:12px}
+.pad label{display:block;font-size:11px;letter-spacing:.16em;color:var(--muted);margin:0 0 8px;font-weight:700}
+.row{display:flex;gap:8px;margin-bottom:16px}.row:last-child{margin-bottom:0}
+input[type=date],textarea{min-width:0;flex:1;width:100%;background:rgba(0,0,0,.4);border:1px solid var(--edge);border-radius:14px;padding:12px;font-size:16px}
+textarea{height:96px;font:12px ui-monospace,Menlo,monospace;resize:none;margin-bottom:8px}
+.btn{border:1px solid var(--edge);background:rgba(255,255,255,.06);border-radius:14px;padding:12px 16px;min-height:44px;font-weight:750;letter-spacing:.04em}
+.btn:active{background:rgba(255,255,255,.12)}.wide{width:100%}
+.msg{min-height:16px;margin:10px 0 0;font-size:12px;color:var(--sand);text-align:center}
+.hero{padding:20px 16px 18px;text-align:center;margin-bottom:12px}
+.ring{position:relative;width:min(100%,284px);aspect-ratio:1;margin:0 auto;border-radius:50%}
+.ring svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.ring.pulse{animation:pulse 1.6s ease-out}
+@keyframes pulse{0%{filter:drop-shadow(0 0 0 transparent)}30%{filter:drop-shadow(0 0 22px var(--glow))}100%{filter:drop-shadow(0 0 0 transparent)}}
+.rc{fill:none;stroke:rgba(255,255,255,.07);stroke-width:1}
+#tk line{stroke:rgba(255,255,255,.15);stroke-width:1.6;stroke-linecap:round}
+#lt line{stroke:var(--lit);stroke-width:2;stroke-linecap:round}
+.mid{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.num{font-size:clamp(64px,22vw,92px);font-weight:800;letter-spacing:-.06em;line-height:.95;font-variant-numeric:tabular-nums;text-shadow:0 0 28px rgba(160,240,200,.25)}
+.u{font-size:11px;letter-spacing:.3em;color:var(--muted);font-weight:700;margin-top:8px}
+.time{font-size:15px;letter-spacing:.1em;color:#b9c4be;margin-top:12px;font-variant-numeric:tabular-nums;font-weight:600;min-width:9ch;text-align:center}
+.next{margin-top:12px;font-size:11px;letter-spacing:.2em;color:var(--muted);font-weight:700;font-variant-numeric:tabular-nums}
+.next b{color:#c7d1cb;font-weight:750}
+.ci{display:flex;align-items:center;justify-content:center;gap:14px;width:100%;min-height:68px;border-radius:22px;border:1px solid rgba(217,239,227,.24);background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(18,22,20,.75));-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);font-size:14px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--ink);box-shadow:0 12px 34px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.1);transition:transform .15s,background .4s,border-color .4s,color .4s}
+.ci:active:not(:disabled){transform:scale(.985)}
+.ci:not(.done){animation:breathe 3.8s ease-in-out infinite}
+@keyframes breathe{50%{border-color:rgba(217,239,227,.5);box-shadow:0 12px 34px rgba(0,0,0,.5),0 0 24px rgba(120,220,170,.14),inset 0 1px 0 rgba(255,255,255,.1)}}
+.ci:disabled{opacity:1;cursor:default}
+.ci.done{color:#8f9a94;border-color:var(--edge);background:rgba(255,255,255,.03)}
+.ic{width:24px;height:24px;border-radius:50%;border:1.5px solid currentColor;display:grid;place-items:center;font-size:12px;letter-spacing:0;transition:background .4s,color .4s}
+.ci.done .ic{background:rgba(217,239,227,.14);border-color:rgba(217,239,227,.4);color:var(--lit)}
+.note{min-height:18px;text-align:center;font-size:12px;color:var(--sand);margin:10px 0 14px;letter-spacing:.05em}
+.note.on{color:var(--lit)}
+.calhead{display:flex;justify-content:center;margin-bottom:14px}
+.nav{display:flex;align-items:center;gap:4px;font-size:13px;font-weight:700}
+.nav button{border:0;background:none;font-size:24px;width:44px;height:44px;padding:0;color:var(--ink)}
+.nav button:disabled{opacity:.2}.nav #mlabel{min-width:128px;text-align:center}
+.wk,.days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.wk{margin-bottom:8px}.wk div{text-align:center;font-size:10px;font-weight:700;color:#5d6862;letter-spacing:.1em}
+.days i{display:block}
+.d{aspect-ratio:1;display:grid;place-items:center;border-radius:11px;font-size:12px;font-weight:650;color:#59645e}
+.d.p{color:#8c9892}
+.d.c{background:rgba(217,239,227,.14);color:var(--lit);box-shadow:inset 0 0 0 1px rgba(217,239,227,.18)}
+.d.m{color:var(--sand);box-shadow:inset 0 0 0 1px rgba(168,151,122,.38)}
+.d.t{box-shadow:inset 0 0 0 1.5px var(--lit);color:var(--ink)}
+.d.c.t{box-shadow:inset 0 0 0 1.5px var(--lit)}
+.leg{display:flex;justify-content:center;gap:20px;margin-top:14px;font-size:10px;letter-spacing:.14em;color:var(--muted);font-weight:700}
+.leg span::before{content:"";display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:7px;vertical-align:-1px}
+.leg .a::before{background:rgba(217,239,227,.3)}.leg .b::before{box-shadow:inset 0 0 0 1px var(--sand)}
+.hold{position:relative;overflow:hidden;width:100%;min-height:56px;border-radius:20px;border:1px solid var(--edge);background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(0,0,0,.35));color:#9aa5a0;font-size:12px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.fill{position:absolute;inset:0;background:linear-gradient(90deg,#4a0b12,var(--red));transform:scaleX(0);transform-origin:left}
+.hold span{position:relative}
+.cap{text-align:center;font-size:11px;color:#59645e;margin:10px 0 0;letter-spacing:.05em}
+@media(prefers-reduced-motion:reduce){.orb,.ci:not(.done),.ring.pulse{animation:none}.ci,.ic{transition:none}}
+.note.warn,.msg.warn{color:#e5a0a4}
+@media(max-width:360px){.app{width:calc(100% - 16px)}.pad{padding:17px 13px}.hero{padding:16px 10px}.wk,.days{gap:4px}.d{border-radius:9px}.num{font-size:clamp(58px,20vw,76px)}}
+</style>
+</head>
+<body>
+<div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div><div class="grid"></div>
+<div class="app">
+  <header class="top"><div class="brand">DEEN<small>OVER DUNYA</small></div><button id="gear" class="gear glass" aria-label="Settings" aria-expanded="false">⋯</button></header>
+
+  <section id="set" class="glass pad" hidden>
+    <label for="sd">START DATE</label>
+    <div class="row"><input type="date" id="sd"><button class="btn" id="sdset">Set</button></div>
+    <label for="bk">BACKUP</label>
+    <textarea id="bk" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea>
+    <div class="row"><button class="btn wide" id="cp">Copy</button><button class="btn wide" id="rs">Restore</button></div>
+    <div class="msg" id="sm" role="status" aria-live="polite"></div>
+  </section>
+
+  <section id="setup" class="glass pad" hidden>
+    <label for="sd0">CLEAN SINCE</label>
+    <div class="row"><input type="date" id="sd0"></div>
+    <button class="btn wide" id="begin">Begin</button>
+    <div class="msg" id="setupMsg" role="status" aria-live="polite"></div>
+  </section>
+
+  <main id="track" hidden>
+    <section class="glass hero" aria-label="Current streak">
+      <div class="ring" id="ring">
+        <svg viewBox="0 0 200 200" aria-hidden="true">
+          <defs><filter id="gl" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+          <circle cx="100" cy="100" r="72" class="rc"/><g id="tk"></g><g id="lt" filter="url(#gl)"></g>
+        </svg>
+        <div class="mid"><div id="num" class="num">0</div><div class="u">DAYS</div><div id="time" class="time">00:00:00</div></div>
+      </div>
+      <div class="next" id="nx"></div>
+    </section>
+
+    <button id="ci" class="ci"><span class="ic" id="ic" aria-hidden="true"></span><span id="cilab">Check in</span></button>
+    <div id="note" class="note" role="status" aria-live="polite"></div>
+
+    <section class="glass pad" aria-label="Calendar">
+      <div class="calhead"><div class="nav"><button id="prev" aria-label="Previous month">‹</button><div id="mlabel"></div><button id="next" aria-label="Next month">›</button></div></div>
+      <div class="wk" aria-hidden="true"><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div><div>S</div></div>
+      <div class="days" id="days"></div>
+      <div class="leg"><span class="a">CHECKED IN</span><span class="b">MISSED</span></div>
+    </section>
+
+    <button id="hold" class="hold" aria-label="Hold to log a slip and reset everything"><i id="fill" class="fill"></i><span>Hold to log a slip</span></button>
+    <p class="cap">Resets the timer, calendar and check-ins</p>
+  </main>
+</div>
+<script>
+(()=>{
+const KEY='deen-over-dunya-v1',$=id=>document.getElementById(id),pad=n=>String(n).padStart(2,'0');
+const key=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const today=()=>key(new Date());
+const parse=k=>{const[y,m,d]=k.split('-').map(Number);return new Date(y,m-1,d)};
+const shift=(k,n)=>{const d=parse(k);d.setDate(d.getDate()+n);return key(d)};
+const isKey=k=>typeof k==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(k)&&key(parse(k))===k;
+// Same wall-clock time n calendar days after t (DST-safe)
+const wall=(t,n)=>{const s=new Date(t);return new Date(s.getFullYear(),s.getMonth(),s.getDate()+n,s.getHours(),s.getMinutes(),s.getSeconds(),s.getMilliseconds()).getTime()};
+function elapsed(start,now){let d=Math.max(0,Math.floor((now-start)/864e5)-1);while(wall(start,d+1)<=now)d++;while(d>0&&wall(start,d)>now)d--;const a=wall(start,d);return{d,r:Math.max(0,now-a),len:wall(start,d+1)-a}}
+
+// State: {v:2,start:ms,from:'YYYY-MM-DD' (check-ins tracked from here),checkins:[...]}
+function norm(o){
+  if(!o||typeof o.start!=='number'||!isFinite(o.start)||o.start<0||o.start>Date.now()+864e5)return null;
+  const start=Math.min(o.start,Date.now()),t=today(),sk=key(new Date(start));
+  let from=isKey(o.from)?o.from:t;if(from>t)from=t;if(from<sk)from=sk;
+  const ci=[...new Set((Array.isArray(o.checkins)?o.checkins:[]).filter(k=>isKey(k)&&k>=from&&k<=t))].sort();
+  return{v:2,start,from,checkins:ci};
+}
+function parseBackup(o){
+  if(!o||typeof o!=='object'||Array.isArray(o)||o.v!==2||typeof o.start!=='number'||!Number.isFinite(o.start)||o.start<0||o.start>Date.now()||!isKey(o.from)||!Array.isArray(o.checkins))return null;
+  const startDay=key(new Date(o.start)),t=today();
+  if(o.from<startDay||o.from>t)return null;
+  if(o.checkins.some(k=>!isKey(k)||k<o.from||k>t)||new Set(o.checkins).size!==o.checkins.length)return null;
+  return norm(o);
+}
+let S=null,storageError='';
+try{const raw=localStorage.getItem(KEY);if(raw){try{S=norm(JSON.parse(raw))}catch{}if(!S){try{localStorage.setItem(KEY+'.bad',raw)}catch{}}}}catch{storageError='Storage is unavailable. Progress may not be saved on this device.'}
+try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch{}
+function persistState(next){
+  try{localStorage.setItem(KEY,JSON.stringify(next));storageError='';return true}
+  catch{storageError='Could not save on this device. Changes may not survive closing the app.';showStorageError();return false}
+}
+function showStorageError(){
+  const msg=storageError;if(!msg)return;
+  const note=$('note');if(S&&note){note.classList.remove('on');note.classList.add('warn');note.textContent=msg}
+  const setupMsg=$('setupMsg');if(!S&&setupMsg)setupMsg.textContent=msg;
+  const sm=$('sm');if(sm&&!$('set').hidden){sm.classList.add('warn');sm.textContent=msg}
+}
+
+const M=[7,14,30,60,90,180,365],isMs=d=>M.includes(d)||(d>365&&d%365===0);
+const span=d=>{if(d>=365){const p=Math.floor(d/365)*365;return[p,p+365]}return[[0,...M].filter(m=>m<=d).pop(),M.find(m=>m>d)]};
+const tk=$('tk'),lt=$('lt'),line=i=>`<line x1="100" y1="5" x2="100" y2="${i%5?11:17}" transform="rotate(${i*6} 100 100)"/>`;
+tk.innerHTML=Array.from({length:60},(_,i)=>line(i)).join('');
+let litN=-1,lastD=null,lastKey=today(),nT,vy,vm,milestoneUntil=0;
+const home=()=>{const n=new Date();vy=n.getFullYear();vm=n.getMonth()};home();
+function pulse(){const r=$('ring');r.classList.remove('pulse');void r.offsetWidth;r.classList.add('pulse')}
+const buzz=ms=>{try{navigator.vibrate&&navigator.vibrate(ms)}catch{}};
+
+function tick(){
+  if(!S)return;
+  if(today()!==lastKey){render();return}
+  const now=Date.now(),{d,r,len}=elapsed(S.start,now),[p,n]=span(d),prog=d+r/len;
+  $('num').textContent=d;
+  $('time').textContent=[r/36e5,r%36e5/6e4,r%6e4/1e3].map(x=>pad(Math.floor(x))).join(':');
+  if(lastD!==null&&d>lastD&&isMs(d)){
+    milestoneUntil=now+1400;pulse();say(d+' days');buzz(25);
+  }
+  const celebrating=now<milestoneUntil;
+  $('ring').classList.toggle('milestone',celebrating);
+  const lit=celebrating?60:Math.min(60,Math.max(0,Math.floor((prog-p)/(n-p)*60)));
+  if(lit!==litN){litN=lit;lt.innerHTML=Array.from({length:lit},(_,i)=>line(i)).join('')}
+  const left=Math.ceil(n-prog);
+  $('nx').innerHTML=`NEXT <b>${n}</b> · ${left} ${left===1?'DAY':'DAYS'} LEFT`;
+  lastD=d;
+}
+function missedInfo(){
+  const t=today();let n=0;for(let k=S.from;k<t;k=shift(k,1))if(!S.checkins.includes(k))n++;
+  const y=shift(t,-1);return{n,y:y>=S.from&&!S.checkins.includes(y)};
+}
+function noteUpd(){
+  const m=missedInfo(),el=$('note');el.classList.remove('on','warn');
+  if(storageError){el.classList.add('warn');el.textContent=storageError;return}
+  el.textContent=!m.n?'':(m.n===1&&m.y)?'Yesterday not checked in':m.n+' days not checked in';
+}
+function say(msg){const el=$('note');if(storageError){noteUpd();return}el.classList.remove('warn');el.textContent=msg;el.classList.add('on');clearTimeout(nT);nT=setTimeout(()=>{if(S)noteUpd()},2600)}
+function cal(){
+  const t=today(),first=(new Date(vy,vm,1).getDay()+6)%7,count=new Date(vy,vm+1,0).getDate(),mn=new Date(vy,vm,1).toLocaleDateString('en-GB',{month:'long'});
+  $('mlabel').textContent=mn+' '+vy;
+  const done=new Set(S.checkins);let h='<i></i>'.repeat(first);
+  for(let d=1;d<=count;d++){
+    const k=`${vy}-${pad(vm+1)}-${pad(d)}`;let c='d',s='';
+    if(done.has(k)){c+=' c';s=', checked in'}
+    else if(k>=S.from&&k<t){c+=' m';s=', missed'}
+    else if(k<t)c+=' p';
+    if(k===t){c+=' t';s+=', today'}
+    h+=`<div class="${c}" aria-label="${d} ${mn}${s}">${d}</div>`;
+  }
+  $('days').innerHTML=h;
+  const e=new Date(S.start),n=new Date();
+  $('prev').disabled=vy*12+vm<=e.getFullYear()*12+e.getMonth();
+  $('next').disabled=vy*12+vm>=n.getFullYear()*12+n.getMonth();
+}
+function render(){
+  const has=!!S;$('track').hidden=!has;$('setup').hidden=has;lastKey=today();
+  $('setupMsg').textContent=!has&&storageError?storageError:'';
+  if(!has)return;
+  const done=S.checkins.includes(lastKey),b=$('ci');
+  b.disabled=done;b.classList.toggle('done',done);
+  $('cilab').textContent=done?'Checked in':'Check in';$('ic').textContent=done?'✓':'';
+  litN=-1;noteUpd();cal();tick();
+  if(!$('set').hidden){
+    if(storageError){$('sm').classList.add('warn');$('sm').textContent=storageError}
+    else if($('sm').classList.contains('warn')){$('sm').classList.remove('warn');$('sm').textContent=''}
+  }
+}
+function checkIn(){
+  if(!S)return;const t=today();if(S.checkins.includes(t))return;
+  const next={...S,checkins:[...S.checkins,t].sort()};
+  if(!persistState(next)){noteUpd();return}
+  S=next;render();pulse();buzz(30);
+}
+function slip(){
+  const next={v:2,start:Date.now(),from:today(),checkins:[]};
+  const saved=persistState(next);
+  if(!saved){
+    // Best effort: don't allow an old streak to silently return after a failed reset.
+    try{localStorage.removeItem(KEY);storageError='Slip reset for this session, but storage failed. Your progress may need to be set up again when you reopen the app.'}catch{storageError='Slip reset for this session, but this device could not save the reset. The previous saved data may reappear after reopening.'}
+  }
+  S=next;lastD=0;milestoneUntil=0;home();render();if(storageError)showStorageError();buzz(60);
+}
+function setStart(v){
+  if(!isKey(v))return;
+  const now=Date.now(),t=v===today()?now:parse(v).getTime();
+  if(t>now){$('sm').textContent='Choose today or an earlier date.';return}
+  let next=norm(S?{...S,start:t}:{start:t,from:today(),checkins:[]});
+  if(!next){$('sm').textContent='That date could not be applied.';return}
+  if(S){
+    const removed=S.checkins.length-next.checkins.length,calendarShift=next.from!==S.from;
+    if(removed>0||calendarShift){
+      const effects=[];
+      if(removed>0)effects.push(`${removed} earlier check-in${removed===1?'':'s'} will be removed`);
+      if(calendarShift)effects.push(`calendar tracking will move from ${S.from} to ${next.from}; days before ${next.from} will no longer count as tracked days`);
+      if(!confirm('Changing the start date will change your tracking data: '+effects.join('; ')+'. Continue?'))return;
+    }
+  }
+  if(!persistState(next)){if(!$('set').hidden){$('sm').classList.add('warn');$('sm').textContent=storageError}if(!S)showStorageError();return}
+  S=next;lastD=null;milestoneUntil=0;home();$('set').hidden=true;$('gear').setAttribute('aria-expanded','false');$('sm').classList.remove('warn');$('sm').textContent='';render();
+}
+
+// Hold-to-slip: one armed hold at a time, fires once per press
+const hb=$('hold'),fl=$('fill');let hT=null,armed=true;
+function hs(){if(hT||!armed)return;fl.style.transition='transform 1.2s linear';fl.style.transform='scaleX(1)';hT=setTimeout(()=>{hT=null;armed=false;fl.style.transition='none';fl.style.transform='scaleX(0)';slip()},1200)}
+function he(){armed=true;if(!hT)return;clearTimeout(hT);hT=null;fl.style.transition='transform .25s ease';fl.style.transform='scaleX(0)'}
+hb.addEventListener('pointerdown',e=>{e.preventDefault();hs()});
+['pointerup','pointerleave','pointercancel','blur','keyup'].forEach(t=>hb.addEventListener(t,he));
+hb.addEventListener('keydown',e=>{if((e.key===' '||e.key==='Enter')&&!e.repeat){e.preventDefault();hs()}});
+hb.addEventListener('contextmenu',e=>e.preventDefault());
+
+$('ci').addEventListener('click',checkIn);
+$('prev').onclick=()=>{vm--;if(vm<0){vm=11;vy--}cal()};
+$('next').onclick=()=>{vm++;if(vm>11){vm=0;vy++}cal()};
+$('begin').onclick=()=>setStart($('sd0').value);
+$('sdset').onclick=()=>setStart($('sd').value);
+$('gear').onclick=()=>{const p=$('set');p.hidden=!p.hidden;$('gear').setAttribute('aria-expanded',String(!p.hidden));$('sm').classList.remove('warn');$('sm').textContent=storageError||'';if(!p.hidden){$('bk').value=S?JSON.stringify(S):'';$('sd').value=key(new Date(S?S.start:Date.now()))}};
+$('cp').onclick=async()=>{const t=$('bk');t.value=S?JSON.stringify(S):'';t.select();let ok=false;try{await navigator.clipboard.writeText(t.value);ok=true}catch{}$('sm').classList.remove('warn');$('sm').textContent=ok?'Copied':'Select and copy the text above'};
+$('rs').onclick=()=>{
+  let n;
+  try{n=parseBackup(JSON.parse($('bk').value));if(!n)throw new Error('Invalid')}
+  catch{$('sm').classList.remove('warn');$('sm').textContent='Invalid backup. Nothing was changed.';return}
+  if(!persistState(n)){$('sm').classList.add('warn');$('sm').textContent='Could not save the restored backup. Your current progress has not been changed.';return}
+  S=n;lastD=null;milestoneUntil=0;home();render();$('sm').classList.remove('warn');$('sm').textContent='Restored';
+};
+$('sd').max=$('sd0').max=today();$('sd0').value=today();
+setInterval(tick,1000);
+document.addEventListener('visibilitychange',tick);
+render();
+})();
+</script>
+</body>
+</html>
