@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080a09">
+<title>Deen over Dunya</title>
+<style>
+:root{color-scheme:dark;--bg:#080a09;--paper:#111412;--ink:#f1f5f1;--muted:#8d9990;--line:#272d29;--green:#d8ded9;--green-lite:#1b3825;--gold:#f2d58a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #80bc91;outline-offset:3px}
+.app{width:min(100% - 24px,510px);margin:0 auto;padding:calc(6px + env(safe-area-inset-top)) 0 calc(8px + env(safe-area-inset-bottom))}
+header{display:flex;justify-content:space-between;align-items:center;padding:2px 1px 12px}.brand{font-size:14px;letter-spacing:.08em;font-weight:850;line-height:1.05;display:flex;flex-direction:column;gap:4px}.brand .deen{font-size:17px;letter-spacing:.03em}.brand .dunya{font-size:10px;letter-spacing:.19em;color:var(--muted);font-weight:700}.edit{border:1px solid var(--line);background:var(--paper);width:37px;height:37px;border-radius:12px;color:var(--muted);font-size:17px}
+.main{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:20px 18px 17px;text-align:center;box-shadow:0 10px 35px #0005}
+.habit{font-weight:650;font-size:15px;max-width:100%;overflow-wrap:anywhere;margin-bottom:17px}.counter{font-size:clamp(82px,23vw,112px);font-weight:780;letter-spacing:-.095em;line-height:.95;font-variant-numeric:tabular-nums}.unit{font-size:16px;font-weight:600;color:var(--muted);margin-top:6px}.today{margin:18px 0 0;width:100%;min-height:52px;padding:14px 16px;border:0;border-radius:16px;background:#202421;color:#d5dbd6;font-weight:760;font-size:16px;transition:background .18s,transform .18s}.today:active{transform:scale(.99)}.today.done{background:#171b18;color:#b7c0b9;border:1px solid #343b36}
+.calendar-card{margin-top:9px;background:var(--paper);border:1px solid var(--line);border-radius:23px;padding:19px 17px 17px}.calhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}.calhead strong{font-size:15px;font-weight:750}.monthnav{display:flex;align-items:center;gap:11px}.monthnav button{border:0;background:transparent;color:var(--ink);font-size:22px;line-height:1;width:25px;height:26px;padding:0}.monthnav button:disabled{opacity:.2;cursor:default}.month{font-size:13px;min-width:111px;text-align:center;font-weight:650}
+.week,.days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}.week{margin-bottom:8px}.week div{text-align:center;font-size:10px;font-weight:650;color:#67746b}.day{border:0;background:transparent;aspect-ratio:1;border-radius:11px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-width:0;color:#b2bdb4;font-size:12px;font-weight:600;padding:0}.day .tick{font-size:12px;line-height:1;min-height:12px}.day.completed{background:var(--green-lite);color:var(--green)}.day.current{box-shadow:inset 0 0 0 1.5px var(--green);color:var(--ink)}.day.future{opacity:.25;cursor:default}.day.empty{visibility:hidden}
+.milestone-card{margin-top:9px;background:var(--paper);border:1px solid var(--line);border-radius:23px;padding:18px 17px}.milestone-title{font-size:14px;font-weight:750;margin:0 0 14px}.milestones{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.milestone{border-radius:13px;background:#191e1a;padding:12px 4px 10px;text-align:center;border:1px solid transparent}.milestone.unlocked{background:var(--green-lite);border-color:#cce5d2}.milestone strong{display:block;font-size:14px}.milestone span{font-size:10px;color:var(--muted);display:block;margin-top:3px}.milestone.unlocked span{color:var(--green)}
+.settings{display:none;margin-top:12px;background:var(--paper);border:1px solid var(--line);padding:16px;border-radius:18px}.settings.open{display:block}.settings label{display:block;font-size:12px;color:var(--muted);margin-bottom:7px}.field{display:flex;gap:8px}.field input{min-width:0;flex:1;border:1px solid var(--line);border-radius:11px;padding:11px;color:var(--ink);background:#111412}.field button,.export{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:11px;padding:10px 13px}.bottom{font-size:10px;color:#626d65;text-align:center;margin-top:10px}
+.toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom));transform:translate(-50%,12px);opacity:0;pointer-events:none;background:#d7f5df;color:#102016;border-radius:999px;padding:11px 16px;font-size:13px;font-weight:650;white-space:nowrap;max-width:calc(100% - 30px);transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(min-width:460px){.main{padding:22px 22px 18px}.calendar-card,.milestone-card{padding-left:22px;padding-right:22px}.week,.days{gap:8px}.day{border-radius:13px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header><div class="brand"><span class="deen">DEEN</span><span class="dunya">OVER DUNYA</span></div><button class="edit" id="edit" aria-label="Edit habit name" title="Edit habit name">✎</button></header>
+  <main>
+    <section class="main">
+      <div class="habit" id="habit">My habit</div>
+      <div class="counter" id="streak">0</div>
+      <div class="unit">days</div>
+      <button id="checkin" class="today">✓ &nbsp; Mark today</button>
+    </section>
+    <section class="calendar-card">
+      <div class="calhead"><strong>Calendar</strong><div class="monthnav"><button id="prev" aria-label="Previous month">‹</button><div class="month" id="month"></div><button id="next" aria-label="Next month">›</button></div></div>
+      <div class="week"><div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div></div>
+      <div class="days" id="days"></div>
+    </section>
+    <section class="milestone-card">
+      <h2 class="milestone-title">Milestones</h2>
+      <div class="milestones" id="milestones"></div>
+    </section>
+    <section class="settings" id="settings">
+      <label for="habitInput">Habit name</label>
+      <div class="field"><input id="habitInput" maxlength="50" placeholder="My habit"><button id="save">Save</button></div>
+      <button class="export" id="export" style="margin-top:9px;width:100%">Export progress</button>
+    </section>
+  </main>
+  <div class="bottom">Saved on this device</div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(()=>{
+const KEY='still-going-v2';
+const localKey=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+const today=()=>localKey(new Date());
+const dateFrom=k=>{const [y,m,d]=k.split('-').map(Number);return new Date(y,m-1,d,12)};
+const addDays=(k,n)=>{const d=dateFrom(k);d.setDate(d.getDate()+n);return localKey(d)};
+const monthKey=k=>k.slice(0,7);
+const initial=()=>({completed:[],name:'My habit',view:monthKey(today())});
+let data;try{data={...initial(),...JSON.parse(localStorage.getItem(KEY)||'{}')};if(!Array.isArray(data.completed))data.completed=[];}catch{data=initial()}
+let view=data.view||monthKey(today());
+const $=id=>document.getElementById(id);
+const save=()=>{data.completed=[...new Set(data.completed)].sort();data.view=view;try{localStorage.setItem(KEY,JSON.stringify(data))}catch{}};
+const streakTo=end=>{const set=new Set(data.completed);let n=0,k=end;while(set.has(k)){n++;k=addDays(k,-1)}return n};
+const streak=()=>data.completed.includes(today())?streakTo(today()):streakTo(addDays(today(),-1));
+let toastTimer;
+function toast(message){const el=$('toast');el.textContent=message;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),1900)}
+function render(){
+save();const s=streak(),done=data.completed.includes(today());$('habit').textContent=data.name||'My habit';$('streak').textContent=s;
+$('checkin').classList.toggle('done',done);$('checkin').disabled=done;$('checkin').textContent=done?'✓  Done for today':'✓  Mark today';
+$('month').textContent=dateFrom(view+'-01').toLocaleDateString(undefined,{month:'short',year:'numeric'});
+$('prev').disabled=view<='2000-01';$('next').disabled=view>=monthKey(today());
+const [y,m]=view.split('-').map(Number),first=new Date(y,m-1,1).getDay(),count=new Date(y,m,0).getDate(),frag=document.createDocumentFragment();
+for(let i=0;i<first;i++){const e=document.createElement('div');e.className='day empty';frag.append(e)}
+for(let d=1;d<=count;d++){const key=`${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`,isDone=data.completed.includes(key),b=document.createElement('button');b.type='button';b.className='day'+(isDone?' completed':'')+(key===today()?' current':'')+(key>today()?' future':'');b.disabled=key>today();b.setAttribute('aria-label',key+(isDone?', completed':''));b.innerHTML=`<span>${d}</span><span class="tick">${isDone?'✓':''}</span>`;b.addEventListener('click',()=>{if(isDone){data.completed=data.completed.filter(x=>x!==key);toast('Removed')}else{data.completed.push(key);toast('Marked complete')}render()});frag.append(b)}
+$('days').replaceChildren(frag);
+const milestones=[{n:7,t:'7 days'},{n:14,t:'14 days'},{n:30,t:'30 days'},{n:100,t:'100 days'}];
+$('milestones').innerHTML=milestones.map(a=>`<div class="milestone ${s>=a.n?'unlocked':''}"><strong>${s>=a.n?'✓ ':''}${a.n}</strong><span>days</span></div>`).join('');
+$('habitInput').value=data.name||'';
+}
+$('checkin').addEventListener('click',()=>{if(!data.completed.includes(today())){data.completed.push(today());render();toast('✓')}})
+$('prev').addEventListener('click',()=>{const d=dateFrom(view+'-01');d.setDate(1);d.setMonth(d.getMonth()-1);view=monthKey(localKey(d));render()});
+$('next').addEventListener('click',()=>{const d=dateFrom(view+'-01');d.setDate(1);d.setMonth(d.getMonth()+1);const k=monthKey(localKey(d));if(k<=monthKey(today()))view=k;render()});
+$('edit').addEventListener('click',()=>{$('settings').classList.toggle('open');if($('settings').classList.contains('open'))$('habitInput').focus()});
+$('save').addEventListener('click',()=>{data.name=$('habitInput').value.trim()||'My habit';save();render();$('settings').classList.remove('open');toast('Saved')});
+$('export').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='still-going-progress.json';a.click();URL.revokeObjectURL(a.href)});
+render();
+})();
+</script>
+</body>
+</html>
